@@ -1,0 +1,25 @@
+public class MissingNumberXOR {
+    public static void main(String[] args) {
+
+        int[] arr = {1, 2, 4, 5};
+        int n = 5;
+
+        int xor1 = 0; // XOR of 1 to n
+        int xor2 = 0; // XOR of array elements
+
+        // Step 1: XOR all numbers from 1 to n
+        for (int i = 1; i <= n; i++) {
+            xor1 ^= i;
+        }
+
+        // Step 2: XOR all elements of array
+        for (int num : arr) {
+            xor2 ^= num;
+        }
+
+        // Step 3: Missing number
+        int missing = xor1 ^ xor2;
+
+        System.out.println("Missing Number: " + missing);
+    }
+}
