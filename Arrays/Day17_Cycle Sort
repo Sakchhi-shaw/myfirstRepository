@@ -1,0 +1,33 @@
+package java_practical;
+
+import java.util.Arrays;
+
+public class Demo{
+	public static void cycleSort(int[] arr) {
+		int i=0;
+			int	n=arr.length;
+			while(i<n) {
+				int correct=arr[i]-1;
+				if(arr[i] <= n && arr[i]!=arr[correct]) {
+					swap(arr,i,correct);
+				}else {
+					i++;
+				}
+				}
+		
+	}
+public static void swap(int[] arr, int i, int correct) {
+int tmp=arr[i];
+arr[i]=arr[correct];
+arr[correct]=tmp;
+	
+}
+public static void main(String[] args) {
+	int[] arr= {3,7,4,9,1};
+	System.out.println("Before Sorting:");
+	System.out.println(Arrays.toString(arr));
+	cycleSort(arr);
+	System.out.println("After Sorting:");
+	System.out.println(Arrays.toString(arr));
+}
+}
