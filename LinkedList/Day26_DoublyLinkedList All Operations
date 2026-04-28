@@ -1,0 +1,77 @@
+package java_practical;
+public class TestDemo{
+	TreeNode head;
+	TreeNode tail;
+	public void addLast(int ele) {
+		TreeNode tmp=new TreeNode(ele);
+if(head==null) {
+	head=tmp;
+	tail=tmp;
+}else {
+	tail.next=tmp;
+	tmp.prev=tail;
+	tail=tmp;
+}
+	}
+	public void print() {
+		TreeNode curr=head;
+		while(curr!=null) {
+			System.out.print(curr.data + " ");
+			curr=curr.next;
+		}
+	}
+public void addFirst(int ele) {
+	TreeNode tmp=new TreeNode(ele);
+	if(head==null) {
+		head=tmp;
+		tail=tmp;
+	}else {
+		tmp.next=head;
+		head.prev=tmp;
+		head=tmp;
+	}
+}
+public int removeFirst() {
+	if(head==null) {
+		System.out.println("No element to remove");
+	}
+	   int value = head.data;
+	 if(head.next==null) {
+		head=null;
+		tail=null;
+	}else {
+		TreeNode old=head;
+		head=head.next;
+		head.prev=null;
+		old.next=null;
+		}
+	 return value;
+}
+public void removeLast() {
+	if(head==null) {
+		System.out.println("No element to remove");
+	}
+	 if(head.next==null) {
+		head=null;
+		tail=null;
+		
+	}else {
+        tail = tail.prev;
+        tail.next = null; 
+	}
+}
+public static void main(String[] args) {
+TestDemo s=new TestDemo();
+s.addLast(10);
+s.addLast(20);
+s.addFirst(40);
+s.print();
+int removedFirst=s.removeFirst();
+System.out.println("\nThe removed element is:" + removedFirst);
+System.out.println("\nAfter removing first element:");
+s.print();
+s.removeLast();
+System.out.println("\nAfter removing last element:");
+s.print();
+}
+}
