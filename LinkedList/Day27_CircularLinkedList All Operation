@@ -1,0 +1,93 @@
+package java_practical;
+
+public class circularLinkedList {
+	TreeNode head;
+	TreeNode tail;
+public void addLast(int data) {
+	TreeNode tmp=new TreeNode(data);
+	if(head==null) {
+		head=tmp;
+		tail=tmp;
+		tmp.next=head;
+	}else {
+		
+	tail.next=tmp;
+	tail=tmp;
+	tmp.next=head;
+	}
+}
+public void addFirst(int data) {
+	TreeNode tmp=new TreeNode(data);
+	if(head==null) {
+		head=tmp;
+		tail=tmp;
+		tmp.next=head;
+	}else {
+		tmp.next=head;
+		head=tmp;
+		tail.next=head;
+	}
+}
+public void print() {
+//	if(head==null) {
+//        System.out.println("List is empty");
+//        return;
+//	}
+	TreeNode curr=head;
+	do {
+	    System.out.print(curr.data + " ");
+	    curr = curr.next;
+	} while (curr != head);
+}
+public void removeLast() {
+	if(head==null) {
+		System.out.println("No Element To Remove");
+	}else if(head==tail) {
+		head=null;
+		tail=null;
+	}else {
+		TreeNode curr=head;
+		while(curr.next.next!=head) {
+			curr=curr.next;
+		}
+		curr.next=head;
+		tail.next=null;
+		tail=curr;		
+	}
+}
+public void removeFirst() {
+	if(head==null) {
+		System.out.println("No Element To Remove");
+	}else if(head==tail) {
+		head=null;
+		tail=null;
+	}else {
+		TreeNode old=head;
+		head=head.next;
+		tail.next=head;
+		old.next=null;
+	}
+}
+public static void main(String[] args) {
+circularLinkedList c=new circularLinkedList();
+c.addLast(20);
+c.addLast(90);
+//for checking whether it is circular linked list or not
+//System.out.println(c.head);
+//System.out.println(c.tail.next);
+if (c.tail.next == c.head) {
+    System.out.println("Circular Linked List confirmed");
+}
+c.addFirst(60);
+if (c.tail.next == c.head) {
+    System.out.println("Circular Linked List confirmed");
+}
+c.print();
+c.removeLast();
+System.out.println("\nAfter removing last element:");
+c.print();
+c.removeFirst();
+System.out.println("\nAfter removing first element:");
+c.print();
+}
+}
