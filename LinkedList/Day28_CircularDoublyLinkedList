@@ -1,0 +1,94 @@
+package java_practical;
+
+public class circularDoublyLinkedList {
+	TreeNode head;
+	TreeNode tail;
+public void addLast(int data) {
+	TreeNode tmp=new TreeNode(data);
+	if(head==null) {
+		head=tmp;
+		tail=tmp;
+		head.prev=tail;
+		tail.next=head;
+		
+	}else {
+		tmp.prev=tail;
+		tail.next=tmp;
+		tmp.next=head;
+		tail=tmp;
+		head.prev=tail;
+	}
+}
+public void print() {
+    if (head == null) {
+        System.out.println("List is empty");
+        return;
+    }
+	TreeNode curr=head;
+	do {
+	    System.out.print(curr.data + " ");
+	    curr = curr.next;
+	} while (curr != head);
+}
+public void addFirst(int data) {
+	TreeNode tmp=new TreeNode(data);
+	if(head==null) {
+		head=tmp;
+		tail=tmp;
+		head.prev=tail;
+		tail.next=head;
+	}else {
+		tmp.next=head;
+		tmp.prev=tail;
+		head.prev=tmp;
+		head=tmp;
+		tail.next=head;
+	}
+}
+public void removeLast() {
+	if(head==null) {
+		System.out.println("No Element To Remove");
+	}else if(head==tail) {
+		head.prev=null;
+		head.next=null;
+		head=null;
+		tail=null;
+	}else {
+        tail = tail.prev;
+        tail.next = head;
+        head.prev = tail;
+	}
+}
+public void removeFirst() {
+	if(head==null) {
+		System.out.println("No Element To Remove");
+	}else if(head==tail) {
+		head.prev=null;
+		head.next=null;
+		head=null;
+		tail=null;
+	}else {
+        head = head.next;
+        head.prev = tail;
+        tail.next = head;
+	}
+}
+public static void main(String[] args) {
+	circularDoublyLinkedList c=new circularDoublyLinkedList();
+	c.addLast(30);
+	c.addLast(90);
+	c.addLast(70);
+	c.print();
+	System.out.println();
+	c.addFirst(12);
+	c.addFirst(99);
+	c.print();
+	c.removeLast();
+	c.removeLast();
+	System.out.println("\nAfter removing last node :\n");
+	c.print();
+	c.removeFirst();
+	System.out.println("\nAfter removing first node :\n");
+	c.print();
+}
+}
