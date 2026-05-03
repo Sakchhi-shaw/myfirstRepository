@@ -1,0 +1,45 @@
+package java_practical;
+
+public class testDemo {
+	TreeNode head;
+	TreeNode tail;
+	public void addLast(int data) {
+		TreeNode tmp=new TreeNode(data);
+		if(head==null) {
+			head=tmp;
+			tail=tmp;
+		}else {
+			tail.next=tmp;
+			tail=tmp;
+		}
+	}
+	public void print() {
+		TreeNode curr=head;
+		while(curr!=null) {
+			System.out.print(curr.data + " ");
+			curr=curr.next;
+		}
+	}
+	public TreeNode middle() {
+		if (head == null) return null;
+		TreeNode slow=head;
+		TreeNode fast=head;
+		while(fast!=null && fast.next!=null) {
+			slow=slow.next;
+			fast=fast.next.next;
+		}
+		return slow;
+	}
+	public static void main(String[] args) {
+testDemo t=new testDemo();
+t.addLast(10);
+t.addLast(20);
+t.addLast(30);
+t.addLast(40);
+t.addLast(50);
+t.print();
+TreeNode middle=t.middle();
+System.out.println("\nThe middle of LinkedList is:"+middle.data);
+	}
+
+}
