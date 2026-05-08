@@ -1,0 +1,101 @@
+package java_practical;
+
+public class testDemo {
+	TreeNode head;
+	TreeNode tail;
+	public void addLast(int data) {
+		TreeNode tmp=new TreeNode(data);
+		if(head==null) {
+			head=tmp;
+			tail=tmp;
+		}else {
+			tail.next=tmp;
+			tail=tmp;
+		}
+	}
+	public void print() {
+		TreeNode curr=head;
+		while(curr!=null) {
+			System.out.print(curr.data + " ");
+			curr=curr.next;
+		}
+	}
+	//Detect a cycle
+	public boolean hasCycle() {
+		TreeNode slow=head;
+		TreeNode fast=head;
+		while(fast!=null && fast.next!=null) {
+			slow=slow.next;
+			fast=fast.next.next;
+			if(slow==fast) {
+				return true;//cycle exists
+			}
+		}
+		return false;//cycle does not exist
+		
+	}
+	
+	public TreeNode detectCycle() {//give start node where cycle start
+		TreeNode slow=head;
+		TreeNode fast=head;
+		boolean iscycle=false;
+		while(fast!=null && fast.next!=null) {
+			slow=slow.next;
+			fast=fast.next.next;
+			if(slow==fast) {
+				iscycle= true;//cycle exists
+				break;
+			}
+		}
+		if(iscycle) {
+		slow=head;
+		while(slow!=fast) {
+			slow=slow.next;
+			fast=fast.next;
+		}
+		}else {
+			return null;
+		}
+		return fast;//we can also return slow as both slow and fast pointer points to same node
+	}
+	
+	//Removing Cycle From LinkedList If Exists
+	public TreeNode removeCycle() {
+		TreeNode slow=head;
+		TreeNode fast=head;
+		boolean iscycle=false;
+		while(fast!=null && fast.next!=null) {
+			slow=slow.next;
+			fast=fast.next.next;
+			if(slow==fast) {
+				iscycle= true;//cycle exists
+				break;
+			}
+		}
+		TreeNode prevNode=null;
+		if(iscycle) {
+		slow=head;
+		while(slow!=fast) {
+			slow=slow.next;
+			prevNode=fast;
+			fast=fast.next;
+		}
+		}else {
+			return null;
+		}
+		prevNode.next=null;//remove cycle
+		return fast;//we can also return slow as both slow and fast pointer points to same node
+	}
+	
+	public static void main(String[] args) {
+testDemo t=new testDemo();
+t.addLast(10);
+t.addLast(20);
+t.addLast(30);
+t.addLast(40);
+t.addLast(50);
+t.print();
+System.out.println("\nCycle present: " + t.hasCycle());
+	}
+
+}
