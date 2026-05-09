@@ -1,0 +1,29 @@
+class Solution {
+    public Node copyRandomList(Node head) {
+        if(head==null){
+            return null;
+        }
+        Map<Node,Node> m=new HashMap<>();
+        Node newHead=new Node(head.val);
+        Node oldTmp=head.next;
+        Node newTmp=newHead;
+        m.put(head,newHead);
+        while(oldTmp!=null){
+            Node copyNode=new Node(oldTmp.val);
+            newTmp.next=copyNode;
+            m.put(oldTmp,copyNode);
+            oldTmp=oldTmp.next;
+            newTmp=newTmp.next;          
+        }
+        oldTmp=head;
+        newTmp=newHead;
+        while(oldTmp!=null){
+            if(oldTmp.random!=null){
+                newTmp.random=m.get(oldTmp.random);
+            }
+            oldTmp=oldTmp.next;
+            newTmp=newTmp.next;
+        }
+return newHead;
+    }
+}
